@@ -1,0 +1,2233 @@
+[
+ {
+  "name": "A buy_nine",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13
+    ],
+    "countdownStatus": "active",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ]
+  ]
+ },
+ {
+  "name": "B cd13",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86,
+   85,
+   84,
+   83,
+   82,
+   81,
+   80,
+   79
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25
+    ],
+    "countdownStatus": "qualified13",
+    "tdst": "104",
+    "risk": "76",
+    "riskStatus": "valid"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "qualified13",
+    0,
+    25,
+    13,
+    "extreme_reached_countdown_eight"
+   ]
+  ]
+ },
+ {
+  "name": "C deferred_pending",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86,
+   85,
+   84,
+   94,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     23,
+     24,
+     25,
+     26
+    ],
+    "countdownStatus": "count13_unqualified",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     21,
+     22,
+     23,
+     24
+    ],
+    "setupStatus": "interrupted",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "buy",
+    "setup": [
+     25,
+     26,
+     27
+    ],
+    "setupStatus": "forming",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "setup_interrupted",
+    1,
+    25,
+    null,
+    "consecutive_condition_failed"
+   ],
+   [
+    "deferred13",
+    0,
+    27,
+    13,
+    "extreme_did_not_reach_countdown_eight"
+   ]
+  ]
+ },
+ {
+  "name": "D deferred_done",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86,
+   85,
+   84,
+   94,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   83
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     23,
+     24,
+     25,
+     26,
+     28
+    ],
+    "countdownStatus": "qualified13",
+    "tdst": "104",
+    "risk": "75",
+    "riskStatus": "valid"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     21,
+     22,
+     23,
+     24
+    ],
+    "setupStatus": "interrupted",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "buy",
+    "setup": [
+     25,
+     26,
+     27,
+     28
+    ],
+    "setupStatus": "forming",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "setup_interrupted",
+    1,
+    25,
+    null,
+    "consecutive_condition_failed"
+   ],
+   [
+    "deferred13",
+    0,
+    27,
+    13,
+    "extreme_did_not_reach_countdown_eight"
+   ],
+   [
+    "qualified13",
+    0,
+    28,
+    13,
+    "extreme_reached_countdown_eight"
+   ]
+  ]
+ },
+ {
+  "name": "E tdst_cancel",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   106,
+   107
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13
+    ],
+    "countdownStatus": "cancelled",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     14,
+     15
+    ],
+    "setupStatus": "forming",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "cancelled",
+    0,
+    15,
+    null,
+    "tdst_breach"
+   ]
+  ]
+ },
+ {
+  "name": "F opposite",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   92,
+   92,
+   94,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100,
+   101,
+   102
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13
+    ],
+    "countdownStatus": "cancelled",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     24
+    ],
+    "countdownStatus": "active",
+    "tdst": "92",
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "setup_completed",
+    1,
+    24,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "cancelled",
+    0,
+    24,
+    null,
+    "opposite_setup_completed"
+   ],
+   [
+    "perfected",
+    1,
+    24,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ]
+  ]
+ },
+ {
+  "name": "G recycle22",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   95,
+   96,
+   97,
+   98,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86,
+   85,
+   84,
+   83,
+   82,
+   81,
+   80,
+   79,
+   78,
+   77,
+   76,
+   75,
+   74,
+   73
+  ],
+  "lows": [
+   90,
+   91,
+   92,
+   93,
+   94,
+   89,
+   88,
+   87,
+   86,
+   85,
+   84,
+   83,
+   82,
+   81,
+   85,
+   86,
+   87,
+   88,
+   84,
+   83,
+   82,
+   81,
+   80,
+   79,
+   78,
+   77,
+   76,
+   75,
+   74,
+   73,
+   72,
+   71,
+   70,
+   69,
+   68,
+   67,
+   66,
+   65,
+   64,
+   63
+  ],
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [],
+    "countdownStatus": "recycled",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     14,
+     15,
+     16,
+     17
+    ],
+    "setupStatus": "interrupted",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "buy",
+    "setup": [
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [],
+    "countdownStatus": "active",
+    "tdst": "98",
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "setup_interrupted",
+    1,
+    18,
+    null,
+    "consecutive_condition_failed"
+   ],
+   [
+    "setup_completed",
+    2,
+    26,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    2,
+    26,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "recycled",
+    0,
+    39,
+    null,
+    "subsequent_setup_extended_to_22"
+   ]
+  ]
+ },
+ {
+  "name": "I risk_invalid",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86,
+   85,
+   84,
+   83,
+   82,
+   81,
+   80,
+   79,
+   75
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25
+    ],
+    "countdownStatus": "qualified13",
+    "tdst": "104",
+    "risk": "76",
+    "riskStatus": "invalidated"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "qualified13",
+    0,
+    25,
+    13,
+    "extreme_reached_countdown_eight"
+   ],
+   [
+    "invalidated",
+    0,
+    26,
+    null,
+    "risk_level_breach"
+   ]
+  ]
+ },
+ {
+  "name": "J risk_equal",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86,
+   85,
+   84,
+   83,
+   82,
+   81,
+   80,
+   79,
+   76
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25
+    ],
+    "countdownStatus": "qualified13",
+    "tdst": "104",
+    "risk": "76",
+    "riskStatus": "valid"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "qualified13",
+    0,
+    25,
+    13,
+    "extreme_reached_countdown_eight"
+   ]
+  ]
+ },
+ {
+  "name": "K flip_equal",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   100,
+   99
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5
+    ],
+    "setupStatus": "forming",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": []
+ },
+ {
+  "name": "L interrupted",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   100,
+   99,
+   102
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5
+    ],
+    "setupStatus": "interrupted",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_interrupted",
+    0,
+    6,
+    null,
+    "consecutive_condition_failed"
+   ]
+  ]
+ },
+ {
+  "name": "M sell_sym",
+  "closes": [
+   100,
+   99,
+   98,
+   97,
+   96,
+   101,
+   102,
+   103,
+   104,
+   105,
+   106,
+   107,
+   108,
+   109,
+   110,
+   111,
+   112,
+   113,
+   114,
+   115,
+   116,
+   117,
+   118,
+   119,
+   120,
+   121
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "sell",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25
+    ],
+    "countdownStatus": "qualified13",
+    "tdst": "96",
+    "risk": "124",
+    "riskStatus": "valid"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "qualified13",
+    0,
+    25,
+    13,
+    "extreme_reached_countdown_eight"
+   ]
+  ]
+ },
+ {
+  "name": "N range_recycle high=99",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   95,
+   96,
+   97,
+   98,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86
+  ],
+  "lows": null,
+  "highs": [
+   101,
+   102,
+   103,
+   104,
+   105,
+   100,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   96,
+   97,
+   98,
+   99,
+   99,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87
+  ],
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25
+    ],
+    "countdownStatus": "recycled",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     14,
+     15,
+     16,
+     17
+    ],
+    "setupStatus": "interrupted",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "buy",
+    "setup": [
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     26
+    ],
+    "countdownStatus": "active",
+    "tdst": "99",
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "setup_interrupted",
+    1,
+    18,
+    null,
+    "consecutive_condition_failed"
+   ],
+   [
+    "setup_completed",
+    2,
+    26,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "recycled",
+    0,
+    26,
+    null,
+    "same_side_setup_range_100_to_200_percent"
+   ],
+   [
+    "perfected",
+    2,
+    26,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ]
+  ]
+ },
+ {
+  "name": "N range_recycle high=113",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   95,
+   96,
+   97,
+   98,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86
+  ],
+  "lows": null,
+  "highs": [
+   101,
+   102,
+   103,
+   104,
+   105,
+   100,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   96,
+   97,
+   98,
+   99,
+   113,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87
+  ],
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25
+    ],
+    "countdownStatus": "recycled",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     14,
+     15,
+     16,
+     17
+    ],
+    "setupStatus": "interrupted",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "buy",
+    "setup": [
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     26
+    ],
+    "countdownStatus": "active",
+    "tdst": "113",
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "setup_interrupted",
+    1,
+    18,
+    null,
+    "consecutive_condition_failed"
+   ],
+   [
+    "setup_completed",
+    2,
+    26,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "recycled",
+    0,
+    26,
+    null,
+    "same_side_setup_range_100_to_200_percent"
+   ],
+   [
+    "perfected",
+    2,
+    26,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ]
+  ]
+ },
+ {
+  "name": "N range_recycle high=114",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   95,
+   96,
+   97,
+   98,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86
+  ],
+  "lows": null,
+  "highs": [
+   101,
+   102,
+   103,
+   104,
+   105,
+   100,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   96,
+   97,
+   98,
+   99,
+   114,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87
+  ],
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26
+    ],
+    "countdownStatus": "active",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     14,
+     15,
+     16,
+     17
+    ],
+    "setupStatus": "interrupted",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "buy",
+    "setup": [
+     18,
+     19,
+     20,
+     21,
+     22,
+     23,
+     24,
+     25,
+     26
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": "114",
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "setup_interrupted",
+    1,
+    18,
+    null,
+    "consecutive_condition_failed"
+   ],
+   [
+    "setup_completed",
+    2,
+    26,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    2,
+    26,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ]
+  ]
+ },
+ {
+  "name": "O risk_tie",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86,
+   85,
+   84,
+   94,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   83,
+   82,
+   81
+  ],
+  "lows": [
+   99,
+   100,
+   101,
+   102,
+   103,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86,
+   85,
+   84,
+   83,
+   70,
+   70,
+   92,
+   91,
+   90,
+   89,
+   88,
+   82,
+   81,
+   80
+  ],
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     25,
+     26,
+     27,
+     28,
+     29
+    ],
+    "countdownStatus": "qualified13",
+    "tdst": "104",
+    "risk": "45",
+    "riskStatus": "valid"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     21,
+     22,
+     23,
+     24
+    ],
+    "setupStatus": "interrupted",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "buy",
+    "setup": [
+     25,
+     26,
+     27,
+     28,
+     29,
+     30
+    ],
+    "setupStatus": "forming",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "setup_interrupted",
+    1,
+    25,
+    null,
+    "consecutive_condition_failed"
+   ],
+   [
+    "qualified13",
+    0,
+    29,
+    13,
+    "extreme_reached_countdown_eight"
+   ]
+  ]
+ },
+ {
+  "name": "P qual_equal",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   88,
+   87,
+   86,
+   85,
+   84,
+   94,
+   94,
+   93,
+   92,
+   91,
+   90,
+   89,
+   85
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13,
+     14,
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     23,
+     24,
+     25,
+     26,
+     28
+    ],
+    "countdownStatus": "qualified13",
+    "tdst": "104",
+    "risk": "81",
+    "riskStatus": "valid"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     21,
+     22,
+     23,
+     24
+    ],
+    "setupStatus": "interrupted",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "buy",
+    "setup": [
+     25,
+     26,
+     27,
+     28
+    ],
+    "setupStatus": "forming",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ],
+   [
+    "setup_interrupted",
+    1,
+    25,
+    null,
+    "consecutive_condition_failed"
+   ],
+   [
+    "deferred13",
+    0,
+    27,
+    13,
+    "extreme_did_not_reach_countdown_eight"
+   ],
+   [
+    "qualified13",
+    0,
+    28,
+    13,
+    "extreme_reached_countdown_eight"
+   ]
+  ]
+ },
+ {
+  "name": "Q perfection_equal",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91
+  ],
+  "lows": [
+   99,
+   100,
+   101,
+   102,
+   103,
+   98,
+   97,
+   96,
+   95,
+   94,
+   89,
+   89,
+   89,
+   89
+  ],
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "active",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ]
+  ]
+ },
+ {
+  "name": "Q2 perfection_later",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   90
+  ],
+  "lows": [
+   99,
+   100,
+   101,
+   102,
+   103,
+   98,
+   97,
+   96,
+   95,
+   94,
+   89,
+   89,
+   89,
+   89,
+   88
+  ],
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "active",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ]
+  ]
+ },
+ {
+  "name": "R tdst_gap_true_extreme",
+  "closes": [
+   100,
+   101,
+   102,
+   103,
+   104,
+   99,
+   98,
+   97,
+   96,
+   95,
+   94,
+   93,
+   92,
+   91,
+   106
+  ],
+  "lows": null,
+  "highs": null,
+  "sequences": [
+   {
+    "side": "buy",
+    "setup": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13
+    ],
+    "setupStatus": "completed",
+    "perfected": true,
+    "countdown": [
+     13
+    ],
+    "countdownStatus": "active",
+    "tdst": "104",
+    "risk": null,
+    "riskStatus": "not_available"
+   },
+   {
+    "side": "sell",
+    "setup": [
+     14
+    ],
+    "setupStatus": "forming",
+    "perfected": false,
+    "countdown": [],
+    "countdownStatus": "inactive",
+    "tdst": null,
+    "risk": null,
+    "riskStatus": "not_available"
+   }
+  ],
+  "events": [
+   [
+    "setup_completed",
+    0,
+    13,
+    9,
+    "nine_consecutive_closes"
+   ],
+   [
+    "perfected",
+    0,
+    13,
+    null,
+    "extreme_vs_setup_six_and_seven"
+   ]
+  ]
+ }
+]
