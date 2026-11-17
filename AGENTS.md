@@ -31,9 +31,10 @@
   - 只改了进行中数字、线段等，没有影响 9 和 13 的出现位置时，回测结果前后完全相同是正常的。
 - `npm run insight -- SYMBOL [--at T] [--lang zhCN|en|both] [--json] [--ref REF]`：输出 AI 趋势面板，包括卡片、结论、各周期、复盘、关注。
   - 加 `--at`：读 `data/` 里五个周期的文件。
-  - 环境变量里有 `INSIGHT_LLM_BASE_URL` 和 `INSIGHT_LLM_API_KEY` 时，会额外调用 LLM 输出结论。
-- `npm run view -- SYMBOL INTERVAL [--at T] [--limit 500] [--compare REF] [--out PATH]`：生成看图 HTML（K 线、标记、线、AI 趋势面板），并打印路径。
+  - `.env` 或 shell 里有 `INSIGHT_LLM_BASE_URL` 和 `INSIGHT_LLM_API_KEY` 时，会额外调用 LLM 输出结论。格式见 `.env.example`。
+- `npm run view -- SYMBOL INTERVAL [--at T] [--limit 500] [--compare REF] [--llm] [--out PATH]`：生成看图 HTML（K 线、标记、线、AI 趋势面板），并打印路径。
   - `--compare REF`：与某个 git 版本逐项对比。
+  - `--llm`：额外调用 LLM，给当前版本生成线上那样的结论，需要 `.env`。
   - 给用户看结果时，生成这个页面并告诉对方路径；能打开浏览器的话直接打开。
 - `--ref REF` / `--compare REF`：用 git 版本 REF 的 `src/` 计算，而不是当前工作区。`baseline` tag 是线上现行算法，所以「改动前」的输出随时都能用 `--ref baseline` 补跑，不必先 stash。
 
@@ -82,5 +83,5 @@
   - `reports/<日期>-<主题>/README.md` 写四件事：改了什么、依据、前后差异的结论，以及用户该运行哪几条 `view --compare baseline` 命令来看效果。
 - 不要移动或删除 `baseline` tag。
 - 提交前 `npm run typecheck` 和 `npm test` 必须全部通过。
-- 不提交 `.env`、API key、`data/` 和 `patches/`。
+- 不提交 `.env`、API key、`data/` 和 `patches/`。LLM 网关地址和 key 不要写进任何提交、报告或 PR，这是公开仓库。
 - 代码、注释、commit message 用英文，commit 遵循 conventional commits（`fix(engine): ...`、`fix(insight): ...`）。

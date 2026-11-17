@@ -3,13 +3,16 @@
 //   npm run view -- BTCUSDC 4h                          live, last 500 closed bars
 //   npm run view -- BTCUSDC 4h --at 2026-11-10T08:00Z   from data/ files, as of a past moment
 //   npm run view -- BTCUSDC 4h --compare baseline       overlay another git ref's output and list what changed
-// Options: --limit 500|1000|1500, --out PATH. The page is written to data/view/ unless --out is given;
+// Options: --limit 500|1000|1500, --out PATH, --llm (also ask the LLM in .env / the shell for the current version's
+// conclusion, as the live service shows it; one request, up to 90 s). The page is written to data/view/ unless --out is given;
 // it loads the chart library from unpkg, so open it with network access.
 
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import path from 'path';
 import { INTERVAL_MS, KlineRow, isDemarkInterval, isDemarkLimit } from '../src/services/manager/demark/binance-klines';
 import { DemarkChartResponse, DemarkInterval, DemarkMarker } from '../src/services/manager/types/demark-types';
+import { generateInsight, readInsightLlmConfig } from '../src/services/sync/signal-insight/llm-client';
+import { loadDotEnv } from './env';
 import { CURRENT, Impl, Panel, buildPanel, closedBy, implAt, loadPanelRows, parseAt, signalSymbolOf } from './impl';
 import { downloadKlines, parseArgs, readKlineFile, toLoaded } from './klines-file';
 
@@ -248,6 +251,22 @@ async function main(): Promise<void> {
         panelError = error instanceof Error ? error.message : String(error);
     }
 
+    let llmHtml = '';
+    if (flags.has('llm') && panelNow !== null) {
+        loadDotEnv();
+        const config = readInsightLlmConfig(process.env, { info: () => undefined, error: (m) => console.error(m) });
+        if (config === null) {
+            llmHtml = '<p class="muted">--llm：没有配置 INSIGHT_LLM_BASE_URL / INSIGHT_LLM_API_KEY，跳过 LLM 结论。</p>';
+            console.log('llm skipped: INSIGHT_LLM_BASE_URL / INSIGHT_LLM_API_KEY not set');
+        } else {
+            const result = await generateInsight(panelNow.input, config);
+            llmHtml = result.ok
+                ? `<h3>LLM 结论（当前版本，${escapeHtml(config.model)}）</h3><table class="panel"><tr><th>结论</th><td>${escapeHtml(result.sections.zhCN.conclusion)}</td></tr><tr><th>Conclusion</th><td>${escapeHtml(result.sections.en.conclusion)}</td></tr></table>`
+                : `<p class="muted">LLM 结论生成失败：${escapeHtml(result.reason)}</p>`;
+            console.log(result.ok ? 'llm: ok' : `llm failed: ${result.reason}`);
+        }
+    }
+
     const candles = rows.map((r, i) => {
         const prevClose = rows[i - 1]?.close ?? r.close;
         return {
@@ -297,6 +316,7 @@ th{background:#f8f9fd;white-space:nowrap}tr.changed td{background:#fff8e1}tr.add
 ${diffTable}
 <h2>AI 趋势面板</h2>
 ${panelHtml(panelNow, panelBefore, beforeLabel, panelError)}
+${llmHtml}
 <script type="application/json" id="data">${data}</script>
 <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
 <script>

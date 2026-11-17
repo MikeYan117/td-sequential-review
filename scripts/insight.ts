@@ -10,9 +10,11 @@
 //
 // The conclusion's content is computed by code (conclusionClauses); the live service has an LLM join those
 // clauses into sentences. Without an LLM this script joins them by the same rule. With INSIGHT_LLM_BASE_URL and
-// INSIGHT_LLM_API_KEY set (an OpenAI-compatible Responses API), it also asks the LLM, exactly as the live service does.
+// INSIGHT_LLM_API_KEY set in the shell or in .env (an OpenAI-compatible Responses API), it also asks the LLM,
+// exactly as the live service does.
 
 import { generateInsight, readInsightLlmConfig } from '../src/services/sync/signal-insight/llm-client';
+import { loadDotEnv } from './env';
 import { CURRENT, buildPanel, implAt, loadPanelRows, parseAt, signalSymbolOf } from './impl';
 import { parseArgs } from './klines-file';
 
@@ -28,6 +30,7 @@ async function main(): Promise<void> {
     const impl = ref === null ? CURRENT : implAt(ref);
     const { snapshot, input, conclusion, templates } = buildPanel(impl, signalSymbolOf(klineSymbol), rows);
 
+    loadDotEnv();
     const llmConfig = readInsightLlmConfig(process.env, { info: () => undefined, error: (m) => console.error(m) });
     const llm = llmConfig === null ? null : await generateInsight(input, llmConfig);
 

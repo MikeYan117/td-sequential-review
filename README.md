@@ -167,8 +167,12 @@ npm run view -- BTCUSDC 4h --compare baseline
 
 **关于 LLM**
 - 不配 LLM 也能看到完整内容：`insight` 脚本会按同样的规则直接把句子拼起来，标成「rule-joined」。
-- 想看 LLM 版，在本地环境变量里设 `INSIGHT_LLM_BASE_URL` 和 `INSIGHT_LLM_API_KEY`。要求是 https、兼容 OpenAI Responses API；模型用 `INSIGHT_LLM_MODEL` 指定。脚本会多输出一行「conclusion (LLM)」。
-- key 只放在本机环境变量或 `.env` 里，`.env` 已被 gitignore。
+- 想看 LLM 版：
+  1. 把 `.env.example` 复制成 `.env`，填上 `INSIGHT_LLM_BASE_URL`（https，兼容 OpenAI Responses API，脚本会请求 `<BASE_URL>/responses`）和 `INSIGHT_LLM_API_KEY`。也可以直接设成 shell 环境变量，shell 里的值优先。
+  2. 之后 `insight` 会多输出一行「conclusion (LLM)」；`view` 加 `--llm` 会在页面上多一张「LLM 结论」表，只针对当前版本，每次运行调用一次，最长等 90 秒。
+- LLM 每次连句的措辞可能略有不同，所以前后对比以规则拼接版为准，LLM 版只用来看最终效果。
+- 模型默认 `gpt-6.1-sol`，和线上一致，一般不用改。
+- key 只放在 `.env` 或 shell 里。`.env` 已被 gitignore，不要把 key 或网关地址写进任何提交、报告或 PR。
 
 **其它说明**
 - 代码注释里的 `R32`、`R34`、`R35`、`R36` 和「spec section N」是维护方内部的规则编号，含义在相邻的注释和测试名里都写了。
