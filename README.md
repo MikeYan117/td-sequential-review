@@ -9,7 +9,7 @@
 
 ## 快速开始
 
-需要 Node 18 或以上。
+需要 Node 18 或以上，并且要能联网：`npm install` 访问 npm，取 K 线访问 `fapi.binance.com`。在沙箱里运行时要先放开网络。
 
 ```bash
 npm install
@@ -39,9 +39,21 @@ npm run view -- BTCUSDC 4h --at 2026-11-10T08:00:00Z
 npm run view -- BTCUSDC 4h --compare baseline
 ```
 
+## 时刻参数 `--at`
+
+`chart --file`、`insight`、`view` 都接受 `--at T`，取值可以是 ISO 时间或毫秒。含义统一为：每个窗口取到 T 时刻为止已收盘的最新一根 K 线，也就是线上在 T 时刻展示的内容。
+
+例如 `--at 2026-11-10T08:00:00Z`：
+- 1h 的最后一根是 07:00 开盘的那根，08:00 那根还没收盘；
+- 4h 的最后一根是 04:00 开盘的那根。
+
+不带 `--at` 时，K 线和面板都用现在的实时数据。
+
 ## 看结果
 
 `npm run view` 会打印生成的 HTML 路径，默认在 `data/view/` 下，用浏览器打开即可。页面要从 unpkg 加载图表库，打开时需要联网。
+
+图上进行中的数字带前缀：`S1`–`S8` 是还在形成的 Setup（灰色圆点），`C1`–`C12` 和 `C+` 是正在数的 Countdown（棕色方块）。这个前缀只是看图页面加的，接口返回的 `label` 本身不带前缀。
 
 页面包含：
 - K 线图，上面画着接口返回的全部标记和线；
@@ -55,6 +67,8 @@ npm run view -- BTCUSDC 4h --compare baseline
   - 差异表：列出每一处新增、消失、变化；
   - 面板：逐项并排显示，有变化的行标黄。
 - 命令行也会输出一行汇总，例如 `chart: 3 added, 1 removed, 2 changed`、`panel: changed 结论, 关注`。
+
+`backtest` 和 `insight` 也接受 `--ref baseline`，用线上现行算法计算，「改动前」的数字随时都能补跑。
 
 建议每次改完都对几个标的、几个周期、几个历史时刻跑一遍 `--compare baseline`。确认差异都是有意为之的，再提交。
 
@@ -187,11 +201,11 @@ npm run view -- BTCUSDC 4h --compare baseline
    - 期望输出、实际输出；
    - 依据：规则出处，或者对照的工具和截图说明。
 2. 改算法，让新用例通过。如果某个原有用例的期望值需要跟着改，在 commit message 里写明原因。
-3. 跑同一批数据的回测，把改动前后的结果（`--json` 输出）放进 `reports/`，附一句结论。如果改动影响 AI 趋势面板，还要挑几个时刻，把 `insight --at` 改动前后的输出一起放进去。
+3. 按 `AGENTS.md`「改动规则」把改动前后的对比放进 `reports/<日期>-<主题>/`，改动前的输出用 `--ref baseline` 跑。
 4. `npm run typecheck` 和 `npm test` 全部通过。
 
 **不要改的东西**
-- 导出函数的签名：`evaluateSequential`、`projectChart`、`buildChart`、`fetchClosedKlines`、`analyzeWindow`、`assembleSnapshot`、`templateSections`、`generateInsight`。
+- 导出函数的签名：`evaluateSequential`、`projectChart`、`buildChart`、`fetchClosedKlines`、`scaleRows`、`analyzeWindow`、`assembleSnapshot`、`templateSections`、`generateInsight`。
 - `demark-types.ts`、`insight-types.ts` 里的响应类型。
 
 改动最后会按原路径搬回线上服务，所以文件路径和导出名也要保持不变。如果确实需要新增字段或改输出格式，先在 PR 里说明理由。

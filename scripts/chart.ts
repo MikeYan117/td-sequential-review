@@ -2,12 +2,15 @@
 //
 // Live (same Binance request and code path as production):
 //   npm run chart -- BTCUSDC 4h [limit=500]
-// From a local file, as the API would have answered when `--end` was the newest closed bar:
-//   npm run chart -- --file data/BTCUSDC-4h.json [--end <openTime ms>] [--limit 500]
+// From a local file, as the API would have answered at moment `--at` (same meaning as in view and insight:
+// the window ends with the newest bar closed by then, so at 08:00Z the newest 1h bar is the 07:00 one):
+//   npm run chart -- --file data/BTCUSDC-4h.json [--at 2026-11-10T08:00:00Z] [--limit 500]
+// `--end <openTime ms>` instead names the newest bar itself by its open time.
 
 import { fetchClosedKlines, isDemarkInterval, isDemarkLimit } from '../src/services/manager/demark/binance-klines';
 import { buildChart } from '../src/services/manager/demark/demark-service';
 import { DemarkLimit } from '../src/services/manager/types/demark-types';
+import { closedBy, parseAt } from './impl';
 import { parseArgs, readKlineFile } from './klines-file';
 
 function toLimit(raw: string | undefined): DemarkLimit {
@@ -24,6 +27,15 @@ async function main(): Promise<void> {
     if (file) {
         const { symbol, interval, rows } = readKlineFile(file);
         const limit = toLimit(flags.get('limit'));
+        const atRaw = flags.get('at');
+        if (atRaw !== undefined) {
+            const window = closedBy(rows, interval, parseAt(atRaw), limit);
+            if (window.length === 0) {
+                throw new Error(`${file} has no bar closed by ${atRaw}`);
+            }
+            console.log(JSON.stringify(buildChart(symbol, interval, window), null, 2));
+            return;
+        }
         const endRaw = flags.get('end');
         const endIndex = endRaw === undefined ? rows.length - 1 : rows.findIndex((r) => r.openTime === Number(endRaw));
         if (endIndex < 0) {
@@ -35,7 +47,7 @@ async function main(): Promise<void> {
     }
     const [symbol, interval, rawLimit] = positional;
     if (!symbol || !interval || !isDemarkInterval(interval)) {
-        throw new Error('Usage: npm run chart -- SYMBOL INTERVAL [limit]  |  npm run chart -- --file PATH [--end MS] [--limit N]');
+        throw new Error('Usage: npm run chart -- SYMBOL INTERVAL [limit]  |  npm run chart -- --file PATH [--at ISO|ms | --end OPEN_TIME_MS] [--limit N]');
     }
     const limit = toLimit(rawLimit);
     const rows = await fetchClosedKlines(symbol, interval, Date.now(), fetch, limit);

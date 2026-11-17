@@ -61,7 +61,16 @@ export async function downloadKlines(symbol: string, interval: DemarkInterval, w
     while (klines.length < wanted) {
         const limit = Math.min(page, wanted - klines.length);
         const url = `${BINANCE_USDM_KLINES_URL}?symbol=${symbol}&interval=${interval}&endTime=${cursor + step - 1}&limit=${limit}`;
-        const response = await fetch(url);
+        let response: Response;
+        try {
+            response = await fetch(url);
+        } catch (error) {
+            const cause = error instanceof Error && error.cause instanceof Error ? error.cause.message : String(error);
+            throw new Error(
+                `Cannot reach ${url} (${cause}). These scripts need network access to fapi.binance.com; ` +
+                    'if you run inside a sandbox, allow network access and retry.'
+            );
+        }
         if (!response.ok) {
             throw new Error(`Binance HTTP ${response.status} for ${url}`);
         }

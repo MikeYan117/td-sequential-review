@@ -19,7 +19,7 @@ interface DrawMarker {
     time: number;
     position: 'aboveBar' | 'belowBar';
     color: string;
-    shape: 'arrowUp' | 'arrowDown' | 'circle';
+    shape: 'arrowUp' | 'arrowDown' | 'circle' | 'square';
     text: string;
 }
 
@@ -42,6 +42,7 @@ const COLOR = {
     buy: '#089981',
     sell: '#f23645',
     progress: '#787b86',
+    countdown: '#b26a00',
     risk: '#9c27b0',
     added: '#2962ff',
     removed: '#ff9800',
@@ -60,13 +61,15 @@ function markerText(m: DemarkMarker): string {
 
 function toDraw(m: DemarkMarker, status: Status): DrawMarker {
     const strong = m.kind === 'countdown13' || (m.kind === 'setup9' && m.perfected);
-    const sideColor = m.kind === 'setupProgress' || m.kind === 'countdownProgress' ? COLOR.progress : COLOR[m.side];
+    const sideColor =
+        m.kind === 'setupProgress' ? COLOR.progress : m.kind === 'countdownProgress' ? COLOR.countdown : COLOR[m.side];
     return {
         time: m.time / 1000,
         position: m.side === 'buy' ? 'belowBar' : 'aboveBar',
         color: status === 'same' ? sideColor : COLOR[status],
-        shape: strong ? (m.side === 'buy' ? 'arrowUp' : 'arrowDown') : 'circle',
-        text: m.label
+        shape: strong ? (m.side === 'buy' ? 'arrowUp' : 'arrowDown') : m.kind === 'countdownProgress' ? 'square' : 'circle',
+        // Progress counts get a prefix so a forming setup count and a running countdown count can't be confused.
+        text: m.kind === 'setupProgress' ? `S${m.label}` : m.kind === 'countdownProgress' ? `C${m.label}` : m.label
     };
 }
 
@@ -236,7 +239,8 @@ async function main(): Promise<void> {
     let panelBefore: Panel | null = null;
     let panelError: string | null = null;
     try {
-        const panelRows = await loadPanelRows(symbol, atMs ?? (rows[rows.length - 1] as KlineRow).openTime + step);
+        // Live pages read the panel live too; --at pages read it from data/ as of the same moment.
+        const panelRows = await loadPanelRows(symbol, atMs);
         const signalSymbol = signalSymbolOf(symbol);
         panelNow = buildPanel(CURRENT, signalSymbol, panelRows);
         panelBefore = implBefore === null ? null : buildPanel(implBefore, signalSymbol, panelRows);
@@ -274,7 +278,7 @@ async function main(): Promise<void> {
                     .join('')}</table>`;
     const legend =
         implBefore === null
-            ? `<span style="color:${COLOR.buy}">■ buy</span> <span style="color:${COLOR.sell}">■ sell</span> <span style="color:${COLOR.progress}">■ 进行中计数</span> <span style="color:${COLOR.risk}">— Risk</span> · 虚线 = TDST · 箭头 = perfected 9 / 13`
+            ? `<span style="color:${COLOR.buy}">■ buy</span> <span style="color:${COLOR.sell}">■ sell</span> <span style="color:${COLOR.progress}">● S1–S8 形成中的 Setup</span> <span style="color:${COLOR.countdown}">■ C1–C12 / C+ 进行中的 Countdown</span> <span style="color:${COLOR.risk}">— Risk</span> · 虚线 = TDST · 箭头 = perfected 9 / 13`
             : `<span style="color:${COLOR.added}">■ 当前版本新增或有变化</span> <span style="color:${COLOR.removed}">■ 只有 ${escapeHtml(beforeLabel)} 有</span> · 其余为两版相同`;
 
     const html = `<!doctype html>

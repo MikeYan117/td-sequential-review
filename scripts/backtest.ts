@@ -1,6 +1,9 @@
 // Backtest 9 and 13 markers on a local kline file.
 //
-//   npm run backtest -- --file data/BTCUSDC-4h.json [--window 500] [--horizons 1,3,6,12,24] [--json]
+//   npm run backtest -- --file data/BTCUSDC-4h.json [--window 500] [--horizons 1,3,6,12,24] [--json] [--ref baseline]
+//
+// --ref REF      run the algorithm as of git ref REF instead of the working tree (e.g. the `baseline` tag), so the
+//                'before' numbers can be produced at any time.
 //
 // --window 0     evaluate the whole file once; every setup9 / countdown13 marker is a signal.
 // --window N     replay production: at each closed bar, compute the chart on the last N bars (what the
@@ -10,11 +13,9 @@
 // Return is measured from the signal bar's close to the close h bars later, signed by the expected
 // direction (buy = up, sell = down). Hit rate = share of signals with a positive signed return.
 
-import { projectChart } from '../src/services/manager/demark/chart';
-import { evaluateSequential } from '../src/services/manager/demark/engine';
-import { scaleRows } from '../src/services/manager/demark/fixed-decimal';
 import { KlineRow } from '../src/services/manager/demark/binance-klines';
-import { DemarkMarker } from '../src/services/manager/types/demark-types';
+import { DemarkInterval, DemarkMarker } from '../src/services/manager/types/demark-types';
+import { CURRENT, Impl, implAt } from './impl';
 import { parseArgs, readKlineFile } from './klines-file';
 
 type SignalKind = 'setup9' | 'countdown13';
@@ -26,9 +27,11 @@ interface Signal {
     perfected?: boolean;
 }
 
+let impl: Impl = CURRENT;
+let chartInterval: DemarkInterval = '1h';
+
 function markersOf(rows: readonly KlineRow[]): DemarkMarker[] {
-    const { scale, bars } = scaleRows(rows);
-    return projectChart(evaluateSequential(bars), rows.map((r) => r.openTime), scale).markers;
+    return impl.buildChart('', chartInterval, rows).markers;
 }
 
 function isSignal(m: DemarkMarker): m is Extract<DemarkMarker, { kind: SignalKind }> {
@@ -77,11 +80,14 @@ function main(): void {
     const { flags } = parseArgs(process.argv.slice(2));
     const file = flags.get('file');
     if (!file) {
-        throw new Error('Usage: npm run backtest -- --file data/SYMBOL-INTERVAL.json [--window 500] [--horizons 1,3,6,12,24] [--json]');
+        throw new Error('Usage: npm run backtest -- --file data/SYMBOL-INTERVAL.json [--window 500] [--horizons 1,3,6,12,24] [--json] [--ref REF]');
     }
+    const ref = flags.get('ref') || null;
+    impl = ref === null ? CURRENT : implAt(ref);
     const window = Number(flags.get('window') ?? 0);
     const horizons = (flags.get('horizons') ?? '1,3,6,12,24').split(',').map(Number);
     const { symbol, interval, rows } = readKlineFile(file);
+    chartInterval = interval;
     const closes = rows.map((r) => Number(r.close));
     const { signals, vanished } = collect(rows, window);
 
@@ -113,12 +119,12 @@ function main(): void {
             })
         }));
 
-    const report = { symbol, interval, bars: rows.length, window, vanishedMarkers: vanished, summary };
+    const report = { symbol, interval, bars: rows.length, window, algorithm: impl.label, vanishedMarkers: vanished, summary };
     if (flags.has('json')) {
         console.log(JSON.stringify(report, null, 2));
         return;
     }
-    console.log(`${symbol} ${interval}: ${rows.length} bars, window=${window || 'full'}, vanished markers=${vanished}`);
+    console.log(`${symbol} ${interval}: ${rows.length} bars, window=${window || 'full'}, vanished markers=${vanished}, algorithm=${impl.label}`);
     for (const g of summary) {
         const cells = g.horizons
             .map((x) => `h${x.h}: ${x.hitRate === null ? '-' : (x.hitRate * 100).toFixed(1)}% / ${x.meanPct === null ? '-' : x.meanPct.toFixed(2)}%`)
