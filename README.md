@@ -14,7 +14,7 @@
 - New Trend；
 - 链上止损卖盘。
 
-链上数据部分依赖外部的链上数据 MCP，本仓库不提供。
+链上数据部分依赖外部的链上数据 MCP，本仓库不提供。怎么使用、怎么测试、怎么交付，见 `skills/market-bottom-assessment/README.md`。
 
 ## 快速开始
 
