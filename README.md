@@ -7,6 +7,15 @@
 
 两样用的是同一个九转引擎（`engine.ts`），改了引擎，两边都会跟着变。
 
+## 底部判断 skill
+
+`skills/market-bottom-assessment/SKILL.md` 是一份给 AI agent 用的 skill，用来回答「BTC 是否见底」这类问题。判断方法分三层：
+- 多周期的 9/13：本地回放用本仓库的 `td-sequential-v2` 引擎；
+- New Trend；
+- 链上止损卖盘。
+
+链上数据部分依赖外部的链上数据 MCP，本仓库不提供。
+
 ## 快速开始
 
 需要 Node 18 或以上，并且要能联网：`npm install` 访问 npm，取 K 线访问 `fapi.binance.com`。在沙箱里运行时要先放开网络。
